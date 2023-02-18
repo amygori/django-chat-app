@@ -8,6 +8,9 @@ django = "*"
 daphne = "*"
 channels = "*"
 channels-redis = "*"
+djangorestframework = "*"
+psycopg2-binary = "*"
+django-environ = "*"
 
 [dev-packages]
 flake8 = "*"
