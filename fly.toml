@@ -1,6 +1,6 @@
-# fly.toml file generated for django-chat-app on 2023-02-20T18:06:03-05:00
+# fly.toml file generated for django-chat-redo on 2023-02-20T21:56:01-05:00
 
-app = "django-chat-app"
+app = "django-chat-redo"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []

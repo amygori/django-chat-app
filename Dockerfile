@@ -23,4 +23,5 @@ COPY . /code/
 EXPOSE 8000
 
 # replace demo.wsgi with <project_name>.wsgi
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "lechat.asgi"]
+CMD ["daphne", "-b", "0.0.0.0", "lechat.asgi:application"]
+
