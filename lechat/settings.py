@@ -17,6 +17,7 @@ import django_on_heroku
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
+    REDIS_URL=(str, 'redis://localhost:6379'),
 )
 
 env.read_env()
@@ -144,7 +145,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [env('REDIS_URL')],
         },
     },
 }
@@ -157,7 +158,6 @@ REST_FRAMEWORK = {
 }
 
 # Configure Django App for Heroku
-
 django_on_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 
