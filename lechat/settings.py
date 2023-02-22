@@ -161,4 +161,4 @@ REST_FRAMEWORK = {
 django_on_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 
-CSRF_TRUSTED_ORIGINS = ["https://django-chat-app.herokuapp.com/"]
+CSRF_TRUSTED_ORIGINS = ["https://django-chat-app.herokuapp.com"]
