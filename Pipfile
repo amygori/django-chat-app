@@ -11,6 +11,7 @@ channels-redis = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
 django-environ = "*"
+django-extensions = "*"
 
 [dev-packages]
 flake8 = "*"
