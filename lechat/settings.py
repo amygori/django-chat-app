@@ -12,10 +12,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import environ
+import django_on_heroku
 
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
+    REDIS_URL=(str, 'redis://localhost:6379'),
 )
 
 env.read_env()
@@ -46,8 +48,8 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.messages",
     'django_extensions',
     "api",
 ]
@@ -126,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -142,7 +145,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [env('REDIS_URL')],
         },
     },
 }
@@ -153,3 +156,9 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
 }
+
+# Configure Django App for Heroku
+django_on_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
+
+CSRF_TRUSTED_ORIGINS = ["https://django-chat-app.herokuapp.com"]
