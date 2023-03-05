@@ -18,6 +18,10 @@ class ChatConsumer(WebsocketConsumer):
 
         self.accept()
 
+        if not self.user.is_authenticated:
+            self.close(code=4003)
+
+
     def disconnect(self, close_code):
         # Leave room group
         async_to_sync(self.channel_layer.group_discard)(
