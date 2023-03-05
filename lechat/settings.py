@@ -51,10 +51,15 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.messages",
     'django_extensions',
+    "corsheaders",
+    "rest_framework",
+    'rest_framework.authtoken',
+    'djoser',
     "api",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -155,6 +160,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',)
 }
 
 # Configure Django App for Heroku
@@ -162,3 +169,4 @@ django_on_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
 
 CSRF_TRUSTED_ORIGINS = ["https://django-chat-app.herokuapp.com"]
+CORS_ALLOW_ALL_ORIGINS = True

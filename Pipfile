@@ -13,6 +13,8 @@ psycopg2-binary = "*"
 django-environ = "*"
 django-extensions = "*"
 django-on-heroku = "*"
+djoser = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 flake8 = "*"

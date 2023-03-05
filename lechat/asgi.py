@@ -10,10 +10,10 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/
 import os
 
 from django.core.asgi import get_asgi_application
-from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 import chatness.routing
+from lechat.token_auth_middleware import TokenAuthMiddleware
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lechat.settings")
 
@@ -25,7 +25,7 @@ application = ProtocolTypeRouter(
     {
         "http": django_asgi_app,
         "websocket": AllowedHostsOriginValidator(
-            AuthMiddlewareStack(URLRouter(chatness.routing.websocket_urlpatterns))
+            TokenAuthMiddleware(URLRouter(chatness.routing.websocket_urlpatterns))
         ),
     }
 )
